@@ -5,8 +5,8 @@ loops.count counts the number of values in arrays and objects
 
 usage:
 ```js
-  var each = require('magic-each').each;
-  var count = require('magic-each').count;
+  var each = require('magic-loops').each;
+  var count = require('magic-loops').count;
   //alternative:
   /*
   var loops = require('magic-loops');
@@ -20,6 +20,7 @@ usage:
   each(obj, function(val, key) {
     console.log('val', val, 'key', key);
   });
+
   var cnt = count(obj);
   console.log('object count', cnt);
 
