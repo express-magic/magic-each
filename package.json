@@ -1,0 +1,19 @@
+{
+  "name": "magic-loops",
+  "version": "0.0.1",
+  "description": "counts and loops arrays and objects",
+  "main": "index.js",
+  "scripts": {
+    "prepub": "bin/build",
+    "test": "bin/build && bin/test"
+  },
+  "author": "Jascha Ehrenreich <jascha@jaeh.at>",
+  "license": "AGPL",
+  "dependencies": {
+    "is": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel": "^4.7.16",
+    "tap": "^0.7.1"
+  }
+}
