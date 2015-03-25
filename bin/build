@@ -2,7 +2,7 @@
 
 echo 'building package source'
 node_modules/.bin/babel \
-  src/index.js \
+  src/loops.js \
   --out-file index.js \
   --experimental \
   --source-maps \
