@@ -10,11 +10,12 @@
   "author": "Jascha Ehrenreich <jascha@jaeh.at>",
   "license": "AGPL",
   "dependencies": {
-    "is": "^3.0.1"
+    "magic-types": "git://github.com/express-magic/magic-types"
   },
   "devDependencies": {
     "babel": "^4.7.16",
-    "tap": "^0.7.1"
+    "chai": "^2.2.0",
+    "mocha": "^2.2.1"
   },
   "repository": {
     "type": "git",

@@ -1,37 +1,35 @@
-import is from 'is';
+import {isA, isO, isFn} from 'magic-types';
+
+export function each (arrOrObj, fn) {
+  fn = fn || () => {};
+
+  if ( isA(arrOrObj) ) {
+    for ( let i = 0; i < arrOrObj.length; i++ ) {
+      if ( isFn(fn) ) {
+        fn(arrOrObj[i], i);
+      }
+    }
+  } else if ( isO(arrOrObj) ) {
+    for ( let key in arrOrObj ) {
+      if ( arrOrObj.hasOwnProperty(key) && isFn(fn) ) {
+        fn(arrOrObj[key], key);
+      }
+    }
+  }
+}
+
+export function count(arrOrObj, cb) {
+  var cnt = 0;
+  each(arrOrObj, () => cnt++);
+
+  if ( isFn(cb) ) { return cb(cnt); }
+
+  return cnt;
+}
 
 var loops = {
-  each (arrOrObj, fn) {
-    fn = fn || () => {};
-
-    if ( is.array(arrOrObj) ) {
-      for ( let i = 0; i < arrOrObj.length; i++ ) {
-        if ( is.fn(fn) ) {
-          fn(arrOrObj[i], i);
-        }
-      }
-    } else if ( is.a(arrOrObj, 'object') ) {
-
-      for ( let key in arrOrObj ) {
-        if ( arrOrObj.hasOwnProperty(key) && is.fn(fn) ) {
-          fn(arrOrObj[key], key);
-        }
-      }
-    }
-  }
-
-, count(arrOrObj, cb) {
-    var cnt = 0;
-    loops.each(arrOrObj, (item) => {
-      cnt++;
-    });
-
-    if ( is.fn(cb) ) {
-      return cb(cnt);
-    }
-
-    return cnt;
-  }
-};
+    each
+  , count
+}
 
 export default loops;

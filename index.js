@@ -1,43 +1,53 @@
 "use strict";
 
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+exports.each = each;
+exports.count = count;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var is = _interopRequire(require("is"));
+var _magicTypes = require("magic-types");
+
+var isA = _magicTypes.isA;
+var isO = _magicTypes.isO;
+var isFn = _magicTypes.isFn;
+
+function each(arrOrObj, fn) {
+  fn = fn || function () {};
+
+  if (isA(arrOrObj)) {
+    for (var i = 0; i < arrOrObj.length; i++) {
+      if (isFn(fn)) {
+        fn(arrOrObj[i], i);
+      }
+    }
+  } else if (isO(arrOrObj)) {
+    for (var key in arrOrObj) {
+      if (arrOrObj.hasOwnProperty(key) && isFn(fn)) {
+        fn(arrOrObj[key], key);
+      }
+    }
+  }
+}
+
+function count(arrOrObj, cb) {
+  var cnt = 0;
+  each(arrOrObj, function () {
+    return cnt++;
+  });
+
+  if (isFn(cb)) {
+    return cb(cnt);
+  }
+
+  return cnt;
+}
 
 var loops = {
-  each: function each(arrOrObj, fn) {
-    fn = fn || function () {};
-
-    if (is.array(arrOrObj)) {
-      for (var i = 0; i < arrOrObj.length; i++) {
-        if (is.fn(fn)) {
-          fn(arrOrObj[i], i);
-        }
-      }
-    } else if (is.a(arrOrObj, "object")) {
-
-      for (var key in arrOrObj) {
-        if (arrOrObj.hasOwnProperty(key) && is.fn(fn)) {
-          fn(arrOrObj[key], key);
-        }
-      }
-    }
-  },
-
-  count: function count(arrOrObj, cb) {
-    var cnt = 0;
-    loops.each(arrOrObj, function (item) {
-      cnt++;
-    });
-
-    if (is.fn(cb)) {
-      return cb(cnt);
-    }
-
-    return cnt;
-  }
+  each: each,
+  count: count
 };
 
-module.exports = loops;
+exports["default"] = loops;
 
 //# sourceMappingURL=index.js.map
