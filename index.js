@@ -10,20 +10,20 @@ var _magicTypes = require("magic-types");
 
 var isA = _magicTypes.isA;
 var isO = _magicTypes.isO;
-var isFn = _magicTypes.isFn;
+var isF = _magicTypes.isF;
 
 function each(arrOrObj, fn) {
   fn = fn || function () {};
 
   if (isA(arrOrObj)) {
     for (var i = 0; i < arrOrObj.length; i++) {
-      if (isFn(fn)) {
+      if (isF(fn)) {
         fn(arrOrObj[i], i);
       }
     }
   } else if (isO(arrOrObj)) {
     for (var key in arrOrObj) {
-      if (arrOrObj.hasOwnProperty(key) && isFn(fn)) {
+      if (arrOrObj.hasOwnProperty(key) && isF(fn)) {
         fn(arrOrObj[key], key);
       }
     }
@@ -36,7 +36,7 @@ function count(arrOrObj, cb) {
     return cnt++;
   });
 
-  if (isFn(cb)) {
+  if (isF(cb)) {
     return cb(cnt);
   }
 
